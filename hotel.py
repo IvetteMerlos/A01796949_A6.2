@@ -147,7 +147,10 @@ class Hotel:
         hotel.available_rooms -= 1
         hotel.reservations.append(reservation_id)
         Hotel._save_hotels(hotels)
-        print(f"Room reserved in hotel '{hotel_id}' for reservation '{reservation_id}'.")
+        print(
+            f"Room reserved in hotel '{hotel_id}' "
+            f"for reservation '{reservation_id}'."
+        )
         return True
 
     @staticmethod
@@ -159,10 +162,18 @@ class Hotel:
             return False
         hotel = hotels[hotel_id]
         if reservation_id not in hotel.reservations:
-            print(f"Reservation '{reservation_id}' not found in hotel '{hotel_id}'.")
+            print(
+                f"Reservation '{reservation_id}' "
+                f"not found in hotel '{hotel_id}'."
+            )
             return False
         hotel.reservations.remove(reservation_id)
-        hotel.available_rooms = min(hotel.total_rooms, hotel.available_rooms + 1)
+        hotel.available_rooms = min(
+            hotel.total_rooms, hotel.available_rooms + 1
+        )
         Hotel._save_hotels(hotels)
-        print(f"Reservation '{reservation_id}' cancelled in hotel '{hotel_id}'.")
+        print(
+            f"Reservation '{reservation_id}' "
+            f"cancelled in hotel '{hotel_id}'."
+        )
         return True

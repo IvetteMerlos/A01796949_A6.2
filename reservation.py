@@ -74,7 +74,8 @@ class Reservation:
             print(f"Error saving reservations file: {e}")
 
     @staticmethod
-    def create_reservation(reservation_id, customer_id, hotel_id, check_in, check_out):
+    def create_reservation(
+            reservation_id, customer_id, hotel_id, check_in, check_out):
         """Create a new reservation."""
         reservations = Reservation._load_reservations()
         if reservation_id in reservations:
@@ -84,7 +85,10 @@ class Reservation:
         # Validate customer and hotel exist
         customers = Customer.get_all_customers()
         if customer_id not in customers:
-            print(f"Customer '{customer_id}' not found. Cannot create reservation.")
+            print(
+                f"Customer '{customer_id}' not found. "
+                f"Cannot create reservation."
+            )
             return None
 
         # Reserve room in hotel (validates hotel exists and has availability)
