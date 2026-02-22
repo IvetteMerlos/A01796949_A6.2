@@ -21,7 +21,10 @@ A01796949_A6.2/
 ├── reservation.py            # Clase Reservation con operaciones CRUD
 ├── test_reservation_system.py # Pruebas unitarias con unittest
 ├── pylint_report.txt         # Reporte de calidad de código (10/10)
+├── pylint/                   # Imagen de consola de código (10/10)
+├── Flake/                   # Imagen de consola sin errores
 └── htmlcov/                  # Reporte de cobertura de pruebas (98%)
+
 ```
 
 ## Funcionalidades
