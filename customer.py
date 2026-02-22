@@ -105,6 +105,11 @@ class Customer:
         return customer
 
     @staticmethod
+    def get_all_customers():
+        """Return all customers as a dictionary."""
+        return Customer._load_customers()
+
+    @staticmethod
     def modify_customer(customer_id, name=None, email=None, phone=None):
         """Modify customer information."""
         customers = Customer._load_customers()

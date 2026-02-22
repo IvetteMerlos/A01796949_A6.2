@@ -12,13 +12,13 @@ RESERVATIONS_FILE = "reservations.json"
 class Reservation:
     """Represents a reservation linking a customer to a hotel."""
 
-    def __init__(self, reservation_id, customer_id, hotel_id, check_in, check_out):
+    def __init__(self, reservation_id, customer_id, hotel_id, dates):
         """Initialize a Reservation instance."""
         self.reservation_id = reservation_id
         self.customer_id = customer_id
         self.hotel_id = hotel_id
-        self.check_in = check_in
-        self.check_out = check_out
+        self.check_in = dates["check_in"]
+        self.check_out = dates["check_out"]
 
     def to_dict(self):
         """Convert Reservation to dictionary."""
@@ -33,12 +33,12 @@ class Reservation:
     @staticmethod
     def from_dict(data):
         """Create a Reservation from a dictionary."""
+        dates = {"check_in": data["check_in"], "check_out": data["check_out"]}
         return Reservation(
             data["reservation_id"],
             data["customer_id"],
             data["hotel_id"],
-            data["check_in"],
-            data["check_out"],
+            dates,
         )
 
     @staticmethod
@@ -82,7 +82,7 @@ class Reservation:
             return None
 
         # Validate customer and hotel exist
-        customers = Customer._load_customers()
+        customers = Customer.get_all_customers()
         if customer_id not in customers:
             print(f"Customer '{customer_id}' not found. Cannot create reservation.")
             return None
@@ -92,8 +92,9 @@ class Reservation:
         if not success:
             return None
 
+        dates = {"check_in": check_in, "check_out": check_out}
         reservation = Reservation(
-            reservation_id, customer_id, hotel_id, check_in, check_out
+            reservation_id, customer_id, hotel_id, dates
         )
         reservations[reservation_id] = reservation
         Reservation._save_reservations(reservations)
